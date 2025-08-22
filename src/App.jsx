@@ -1,6 +1,9 @@
 import "./styles.css";
 
 export default function App() {
+  let message = "Hello world";
+  // debugger
+  console.log("test", message);
   return (
     <div className="App">
       <h1>Hello CodeSandbox</h1>
