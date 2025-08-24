@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Clock = ({ color }) => {
   const [date, setDate] = useState(new Date());
 
-  setInterval(() => {
-    setDate(new Date());
-  }, 1000);
+  useEffect(() => {
+    setInterval(() => {
+      setDate(new Date());
+    }, 1000);
+  }, []);
   return (
     <div>
       <h1>Clock</h1>
