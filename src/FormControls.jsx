@@ -16,7 +16,6 @@ const FormControls = () => {
 
   return (
     <div>
-      {" "}
       <form>
         <input
           type="text"
