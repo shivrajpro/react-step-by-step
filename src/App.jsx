@@ -1,40 +1,163 @@
-import { useEffect, useState } from "react";
 import "./styles.css";
-import Counter from "./Counter";
 
 export default function App() {
-  const [count, setCount] = useState(0);
-  const [data, setData] = useState(4);
+  const cardStyle = {
+    border: "1px solid #ccc",
+    width: "200px",
+    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+    margin: "10px",
+  };
 
-  function counterFunction() {
-    console.log("counterFunction", count);
-  }
-
-  function dataFunction() {
-    console.log("dataFunction", data);
-  }
-
-  useEffect(() => {
-    counterFunction();
-  }, [count]);
-
-  useEffect(() => {
-    dataFunction();
-  }, [count, data]);
-
-  function callOnce() {
-    console.log("callOnce called");
-  }
-
-  // callOnce();
   return (
     <div className="App">
       <h1>Hello CodeSandbox</h1>
       <h2>Start editing to see some magic happen!</h2>
-      <button onClick={() => setCount(count + 1)}>Count {count}</button>
-      <button onClick={() => setData(data + 1)}>Data {data}</button>
 
-      {count < 5 ? <Counter counter={count} data={data} /> : null}
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <div style={cardStyle}>
+          <img
+            style={{ width: "200px" }}
+            src="https://www.w3schools.com/howto/img_avatar.png"
+            alt="user-img"
+          />
+          <div style={{ padding: "10px" }}>
+            <h4>John Doe</h4>
+            <p>Software Developer</p>
+          </div>
+        </div>
+        <div style={cardStyle}>
+          <img
+            style={{ width: "200px" }}
+            src="https://www.w3schools.com/howto/img_avatar.png"
+            alt="user-img"
+          />
+          <div style={{ padding: "10px" }}>
+            <h4>John Doe</h4>
+            <p>Software Developer</p>
+          </div>
+        </div>
+        <div style={cardStyle}>
+          <img
+            style={{ width: "200px" }}
+            src="https://www.w3schools.com/howto/img_avatar.png"
+            alt="user-img"
+          />
+          <div style={{ padding: "10px" }}>
+            <h4>John Doe</h4>
+            <p>Software Developer</p>
+          </div>
+        </div>
+        <div style={cardStyle}>
+          <img
+            style={{ width: "200px" }}
+            src="https://www.w3schools.com/howto/img_avatar.png"
+            alt="user-img"
+          />
+          <div style={{ padding: "10px" }}>
+            <h4>John Doe</h4>
+            <p>Software Developer</p>
+          </div>
+        </div>
+        <div style={cardStyle}>
+          <img
+            style={{ width: "200px" }}
+            src="https://www.w3schools.com/howto/img_avatar.png"
+            alt="user-img"
+          />
+          <div style={{ padding: "10px" }}>
+            <h4>John Doe</h4>
+            <p>Software Developer</p>
+          </div>
+        </div>
+        <div style={cardStyle}>
+          <img
+            style={{ width: "200px" }}
+            src="https://www.w3schools.com/howto/img_avatar.png"
+            alt="user-img"
+          />
+          <div style={{ padding: "10px" }}>
+            <h4>John Doe</h4>
+            <p>Software Developer</p>
+          </div>
+        </div>
+        <div style={cardStyle}>
+          <img
+            style={{ width: "200px" }}
+            src="https://www.w3schools.com/howto/img_avatar.png"
+            alt="user-img"
+          />
+          <div style={{ padding: "10px" }}>
+            <h4>John Doe</h4>
+            <p>Software Developer</p>
+          </div>
+        </div>
+        <div style={cardStyle}>
+          <img
+            style={{ width: "200px" }}
+            src="https://www.w3schools.com/howto/img_avatar.png"
+            alt="user-img"
+          />
+          <div style={{ padding: "10px" }}>
+            <h4>John Doe</h4>
+            <p>Software Developer</p>
+          </div>
+        </div>
+        <div style={cardStyle}>
+          <img
+            style={{ width: "200px" }}
+            src="https://www.w3schools.com/howto/img_avatar.png"
+            alt="user-img"
+          />
+          <div style={{ padding: "10px" }}>
+            <h4>John Doe</h4>
+            <p>Software Developer</p>
+          </div>
+        </div>
+        <div style={cardStyle}>
+          <img
+            style={{ width: "200px" }}
+            src="https://www.w3schools.com/howto/img_avatar.png"
+            alt="user-img"
+          />
+          <div style={{ padding: "10px" }}>
+            <h4>John Doe</h4>
+            <p>Software Developer</p>
+          </div>
+        </div>
+        <div style={cardStyle}>
+          <img
+            style={{ width: "200px" }}
+            src="https://www.w3schools.com/howto/img_avatar.png"
+            alt="user-img"
+          />
+          <div style={{ padding: "10px" }}>
+            <h4>John Doe</h4>
+            <p>Software Developer</p>
+          </div>
+        </div>
+        <div style={cardStyle}>
+          <img
+            style={{ width: "200px" }}
+            src="https://www.w3schools.com/howto/img_avatar.png"
+            alt="user-img"
+          />
+          <div style={{ padding: "10px" }}>
+            <h4>John Doe</h4>
+            <p>Software Developer</p>
+          </div>
+        </div>
+        <div style={cardStyle}>
+          <img
+            style={{ width: "200px" }}
+            src="https://www.w3schools.com/howto/img_avatar.png"
+            alt="user-img"
+          />
+          <div style={{ padding: "10px" }}>
+            <h4>John Doe</h4>
+            <p>Software Developer</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
