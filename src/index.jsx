@@ -8,6 +8,7 @@ const root = createRoot(rootElement);
 
 root.render(
   <StrictMode>
+    <h1 className="heading">Index.jsx CSS</h1>
     <App />
   </StrictMode>
 );

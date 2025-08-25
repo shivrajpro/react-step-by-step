@@ -1,4 +1,10 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
+.user-card {
+  border: 1px solid #ccc;
+  width: 200px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  margin: 10px;
+}
+
+.heading {
+  color: brown;
 }
