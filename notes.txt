@@ -1,0 +1,6 @@
+command to create react project using vite: npm create vite@latest
+
+Controlled and Uncontrolled component:
+
+if we are accessing/controlling the form controls like input, select, radio using state vairables then they are called controlled components
+otherwise they are called Uncontrolled components where we controll the form controls using useRef or query selectors
