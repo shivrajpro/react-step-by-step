@@ -1,43 +1,60 @@
 import { useState } from "react";
 
 function App() {
-  const [user, setUser] = useState({
-    name: "shivraj",
-    address: { city: "pune", state: "MH" },
-  });
+  const [usernames, setUsernames] = useState(["Shivraj", "Aniket", "Sanket"]);
+  const [users, setUsers] = useState([
+    {
+      name: "Shivraj",
+      age: 21,
+    },
+    {
+      name: "Aniket",
+      age: 33,
+    },
+    {
+      name: "Sanket",
+      age: 45,
+    },
+  ]);
 
   const handleNameChange = (newName) => {
-    setUser((prevUser) => ({
-      ...prevUser,
-      name: newName,
-    }));
+    usernames[usernames.length - 1] = newName;
+    setUsernames([...usernames]);
   };
 
-  const handleCityChange = (newCity) => {
-    setUser((prevUser) => ({
-      ...prevUser,
-      address: { ...prevUser.address, city: newCity },
-    }));
+  const handleAgeChange = (newAge) => {
+    users[users.length - 1].age = newAge;
+    setUsers([...users]);
   };
+
   return (
     <>
       <h1>App Component</h1>
       <input
         type="text"
-        placeholder="enter username"
+        placeholder="enter last username"
         onChange={(evt) => handleNameChange(evt.target.value)}
       />
+      {usernames.map((name, index) => (
+        <h2 key={index}>{name}</h2>
+      ))}
+
+      <hr />
+
+      <h1>Updating Objects in React</h1>
       <input
         type="text"
-        placeholder="enter city"
-        onChange={(evt) => handleCityChange(evt.target.value)}
+        placeholder="enter last user age"
+        onChange={(evt) => handleAgeChange(evt.target.value)}
       />
-      <h3>Name: {user.name} </h3>
-      <h3>City: {user.address.city} </h3>
-      <h3>State: {user.address.state} </h3>
-      {/* <AddUser setUser={setUser} />
-      <hr />
-      <DisplayUser user={user} /> */}
+
+      {users.map((user, index) => {
+        return (
+          <h2 key={index}>
+            {user.name} is {user.age} years old
+          </h2>
+        );
+      })}
     </>
   );
 }
