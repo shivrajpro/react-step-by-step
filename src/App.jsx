@@ -1,60 +1,58 @@
-import { useState } from "react";
+import { useActionState } from "react";
 
 function App() {
-  const [usernames, setUsernames] = useState(["Shivraj", "Aniket", "Sanket"]);
-  const [users, setUsers] = useState([
-    {
-      name: "Shivraj",
-      age: 21,
-    },
-    {
-      name: "Aniket",
-      age: 33,
-    },
-    {
-      name: "Sanket",
-      age: 45,
-    },
-  ]);
+  const handleSubmit = async (previousData, formData) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
-  const handleNameChange = (newName) => {
-    usernames[usernames.length - 1] = newName;
-    setUsernames([...usernames]);
+    console.log("previousData", previousData);
+    const username = formData.get("username");
+    const password = formData.get("password");
+    console.log("username", username);
+    console.log("password", password);
+
+    if (username && password) {
+      return { message: "Data submitted", username, password };
+    } else {
+      return {
+        error: "Please provide both username and password",
+        username,
+        password,
+      };
+    }
   };
 
-  const handleAgeChange = (newAge) => {
-    users[users.length - 1].age = newAge;
-    setUsers([...users]);
-  };
+  const [data, action, pending] = useActionState(handleSubmit, {
+    username: "",
+    password: "",
+  });
 
   return (
     <>
-      <h1>App Component</h1>
-      <input
-        type="text"
-        placeholder="enter last username"
-        onChange={(evt) => handleNameChange(evt.target.value)}
-      />
-      {usernames.map((name, index) => (
-        <h2 key={index}>{name}</h2>
-      ))}
+      <h1>useActionState hook in RectJS</h1>
+      <form action={action}>
+        <input
+          defaultValue={data?.username}
+          type="text"
+          name="username"
+          placeholder="Enter username"
+        />
+        <input
+          defaultValue={data?.password}
+          type="password"
+          name="password"
+          placeholder="Enter password"
+        />
+        <button type="submit" disabled={pending}>
+          {pending ? "Submitting..." : "Submit"}
+        </button>
+      </form>
 
+      {data?.error && <h3 style={{ color: "red" }}>{data.error}</h3>}
+      {data?.message && <h3 style={{ color: "green" }}>{data.message}</h3>}
       <hr />
 
-      <h1>Updating Objects in React</h1>
-      <input
-        type="text"
-        placeholder="enter last user age"
-        onChange={(evt) => handleAgeChange(evt.target.value)}
-      />
-
-      {users.map((user, index) => {
-        return (
-          <h2 key={index}>
-            {user.name} is {user.age} years old
-          </h2>
-        );
-      })}
+      <h2>Username: {data?.username}</h2>
+      <h2>Password: {data?.password}</h2>
     </>
   );
 }
