@@ -1,31 +1,34 @@
-import { useState, useTransition } from "react";
+import { useState } from "react";
 
 function App() {
-  const [myPending, setMyPending] = useState(false);
-  const [pending, startTransition] = useTransition(false);
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState("");
 
-  const handleSubmit = async () => {
-    setMyPending(true);
-
-    await new Promise((res) => setTimeout(res, 2000));
-
-    setMyPending(false);
+  const handleAddUser = () => {
+    setUsers([...users, user]);
+    setUser("");
   };
 
-  const handleTransition = () => {
-    startTransition(async () => {
-      await new Promise((res) => setTimeout(res, 2000));
-    });
-  };
+  const totalUsers = users.length;
+  const lastUser = users[totalUsers - 1] || "No users added yet";
+  const uniqueUsers = [...new Set(users)];
+  // above three variables are derived state
+
   return (
     <>
-      <h1>useTransition Hook</h1>
-      <button disabled={myPending} onClick={handleSubmit}>
-        Click (state)
-      </button>
-      <button disabled={pending} onClick={handleTransition}>
-        Click (transition)
-      </button>
+      <h1>Total Users: {totalUsers}</h1>
+      <h1>Last User: {lastUser}</h1>
+      <h1>Unique Users: {uniqueUsers.length}</h1>
+      <input
+        type="text"
+        onChange={(evt) => setUser(evt.target.value)}
+        placeholder="enter username"
+        value={user}
+      />
+      <button onClick={handleAddUser}>Add User</button>
+      {users.map((user, index) => (
+        <h4 key={index}>{user}</h4>
+      ))}
     </>
   );
 }
