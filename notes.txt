@@ -4,3 +4,6 @@ Controlled and Uncontrolled component:
 
 if we are accessing/controlling the form controls like input, select, radio using state vairables then they are called controlled components
 otherwise they are called Uncontrolled components where we controll the form controls using useRef or query selectors
+
+in routing, if routes/navigations are going wrong then verify path attribute of
+Route tag and to attribute of Link/NavLink tag
