@@ -17,6 +17,15 @@ const Users = () => {
           <NavLink to={"/users/" + user.id}> {user.name} </NavLink>
         </div>
       ))}
+      <hr />
+      <h2>User List Page with Name in URL</h2>
+      {userData.map((user) => (
+        <div key={user.id}>
+          <NavLink to={"/users/" + user.id + "/" + user.name}>
+            {user.name}
+          </NavLink>
+        </div>
+      ))}
     </div>
   );
 };

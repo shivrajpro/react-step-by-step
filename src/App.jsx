@@ -1,15 +1,15 @@
-import { Navigate, Route, Routes } from "react-router";
+import { Route, Routes } from "react-router";
 import About from "./About";
-import Home from "./Home";
-import Navbar from "./Navbar";
-import Login from "./Login";
-import PageNotFound from "./PageNotFound";
 import College from "./College";
-import Student from "./Student";
 import Department from "./Department";
 import Details from "./Details";
-import Users from "./Users";
+import Home from "./Home";
+import Login from "./Login";
+import Navbar from "./Navbar";
+import PageNotFound from "./PageNotFound";
+import Student from "./Student";
 import UserDetails from "./UserDetails";
+import Users from "./Users";
 
 function App() {
   return (
@@ -18,8 +18,10 @@ function App() {
       <Routes>
         <Route element={<Navbar />}>
           <Route path="/" element={<Home />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/users/:id" element={<UserDetails />} />
+          <Route path="/users/list?" element={<Users />} />{" "}
+          {/* ? means optional segment */}
+          <Route path="/users/:id/:name?" element={<UserDetails />} />
+          {/* Dynamic optional segment */}
           <Route>
             <Route path="/user">
               <Route path="/user/about" element={<About />} />
@@ -34,8 +36,8 @@ function App() {
           <Route path="department" element={<Department />} />
           <Route path="details" element={<Details />} />
         </Route>
-        {/* <Route path="*" element={<PageNotFound />} /> */}
-        <Route path="*" element={<Navigate to="/login" />} />
+        <Route path="*" element={<PageNotFound />} />
+        {/* <Route path="*" element={<Navigate to="/login" />} /> */}
       </Routes>
     </div>
   );
