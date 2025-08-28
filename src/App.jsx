@@ -1,21 +1,15 @@
-import useToggle from "./useToggle";
+import { Link, Route, Routes } from "react-router";
+import Home from "./Home";
+import About from "./About";
 
 function App() {
-  const [val, toggleValue] = useToggle(true);
-  const [data, setData] = useToggle(true);
   return (
     <div>
-      <button onClick={toggleValue}>Toggle</button>
-      <button onClick={() => toggleValue(true)}>Show</button>
-      <button onClick={() => toggleValue(false)}>Hide</button>
-      {val && <h1>Custom hooks in React</h1>}
-
-      <hr />
-
-      <button onClick={setData}>Toggle</button>
-      <button onClick={() => setData(true)}>Show</button>
-      <button onClick={() => setData(false)}>Hide</button>
-      {data && <h1>Custom hooks in React</h1>}
+      <Link to="/">Home</Link> | <Link to="/about">About</Link>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
     </div>
   );
 }
