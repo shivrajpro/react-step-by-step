@@ -1,22 +1,22 @@
-import { useState } from "react";
-import College from "./College";
-import { SubjectContext } from "./ContextData";
+import useToggle from "./useToggle";
 
 function App() {
-  const [subject, setSubject] = useState("maths");
-
+  const [val, toggleValue] = useToggle(true);
+  const [data, setData] = useToggle(true);
   return (
-    <SubjectContext.Provider value={subject}>
-      <div style={{ backgroundColor: "yellow", padding: 10 }}>
-        <h1>Context API in ReactJS</h1>
-        <select onChange={(e) => setSubject(e.target.value)} value={subject}>
-          <option value="maths">Maths</option>
-          <option value="science">Science</option>
-          <option value="english">English</option>
-        </select>
-        <College />
-      </div>
-    </SubjectContext.Provider>
+    <div>
+      <button onClick={toggleValue}>Toggle</button>
+      <button onClick={() => toggleValue(true)}>Show</button>
+      <button onClick={() => toggleValue(false)}>Hide</button>
+      {val && <h1>Custom hooks in React</h1>}
+
+      <hr />
+
+      <button onClick={setData}>Toggle</button>
+      <button onClick={() => setData(true)}>Show</button>
+      <button onClick={() => setData(false)}>Hide</button>
+      {data && <h1>Custom hooks in React</h1>}
+    </div>
   );
 }
 export default App;
