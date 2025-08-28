@@ -4,7 +4,8 @@ const College = () => {
   return (
     <div>
       <h1>College Component</h1>
-      <NavLink to="student">Student</NavLink> |
+      <NavLink to="/">Go to Home Page</NavLink> <br />
+      <NavLink to="">Student</NavLink> |
       <NavLink to="department">Department</NavLink> |
       <NavLink to="details">College Details</NavLink>
       <Outlet />

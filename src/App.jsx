@@ -12,14 +12,17 @@ import Details from "./Details";
 function App() {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/login" element={<Login />} />
+        <Route element={<Navbar />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/login" element={<Login />} />
+        </Route>
+
         <Route path="/college" element={<College />}>
           {/* Nested Routes */}
-          <Route path="student" element={<Student />} />
+          <Route index element={<Student />} />
           <Route path="department" element={<Department />} />
           <Route path="details" element={<Details />} />
         </Route>
