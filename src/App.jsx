@@ -4,6 +4,10 @@ import Home from "./Home";
 import Navbar from "./Navbar";
 import Login from "./Login";
 import PageNotFound from "./PageNotFound";
+import College from "./College";
+import Student from "./Student";
+import Department from "./Department";
+import Details from "./Details";
 
 function App() {
   return (
@@ -13,6 +17,12 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/college" element={<College />}>
+          {/* Nested Routes */}
+          <Route path="student" element={<Student />} />
+          <Route path="department" element={<Department />} />
+          <Route path="details" element={<Details />} />
+        </Route>
         {/* <Route path="*" element={<PageNotFound />} /> */}
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
