@@ -1,9 +1,10 @@
-import React from "react";
+import Subject from "./Subject";
 
-const Student = ({ student }) => {
+const Student = () => {
   return (
-    <div>
-      <h4>{student.name}</h4>
+    <div style={{ backgroundColor: "red", padding: 10 }}>
+      <h1>Student Component</h1>
+      <Subject />
     </div>
   );
 };

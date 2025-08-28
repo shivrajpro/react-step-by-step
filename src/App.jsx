@@ -1,41 +1,22 @@
-import { useId } from "react";
+import { useState } from "react";
+import College from "./College";
+import { SubjectContext } from "./ContextData";
 
 function App() {
+  const [subject, setSubject] = useState("maths");
+
   return (
-    <>
-      <h1>useId hook in RectJS</h1>
-      <UserForm />
-      <hr />
-      <UserForm />
-    </>
+    <SubjectContext.Provider value={subject}>
+      <div style={{ backgroundColor: "yellow", padding: 10 }}>
+        <h1>Context API in ReactJS</h1>
+        <select onChange={(e) => setSubject(e.target.value)} value={subject}>
+          <option value="maths">Maths</option>
+          <option value="science">Science</option>
+          <option value="english">English</option>
+        </select>
+        <College />
+      </div>
+    </SubjectContext.Provider>
   );
 }
 export default App;
-
-function UserForm() {
-  const username = useId();
-  const password = useId();
-  const skills = useId();
-  const terms = useId();
-
-  return (
-    <form>
-      <label htmlFor={username}>Enter Username</label>
-      <input id={username} type="text" placeholder="enter username" />
-      <br />
-      <br />
-      <label htmlFor={password}>Enter Password</label>
-      <input id={password} type="password" placeholder="enter password" />
-      <br />
-      <br />
-      <label htmlFor={skills}>Enter Skills</label>
-      <input id={skills} type="text" placeholder="enter username" />
-      <br />
-      <br />
-      <input id={terms} type="checkbox" placeholder="enter username" />
-      <label htmlFor={terms}>Terms and Conditions</label>
-      <br />
-      <br />
-    </form>
-  );
-}
