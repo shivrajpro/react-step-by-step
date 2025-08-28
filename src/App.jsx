@@ -1,14 +1,20 @@
-import { Link, Route, Routes } from "react-router";
-import Home from "./Home";
+import { Navigate, Route, Routes } from "react-router";
 import About from "./About";
+import Home from "./Home";
+import Navbar from "./Navbar";
+import Login from "./Login";
+import PageNotFound from "./PageNotFound";
 
 function App() {
   return (
     <div>
-      <Link to="/">Home</Link> | <Link to="/about">About</Link>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+        {/* <Route path="*" element={<PageNotFound />} /> */}
+        <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </div>
   );
