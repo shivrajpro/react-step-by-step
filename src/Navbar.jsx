@@ -1,11 +1,18 @@
-import { Link, Outlet } from "react-router";
-
+import { NavLink, Outlet } from "react-router";
+import "./styles.css";
 export default function Navbar() {
   return (
     <div>
-      <Link to="/">Home</Link> | <Link to="/user/about">About</Link> |{" "}
-      <Link to="/user/login">Login</Link> | <Link to="/college">College</Link> |{" "}
-      <Link to="/users">Users</Link>
+      <NavLink to="/">Home</NavLink> |{" "}
+      <NavLink
+        className={({ isActive }) => (isActive ? "custom-active" : "link")}
+        to="/user/about"
+      >
+        About
+      </NavLink>{" "}
+      | <NavLink to="/user/login">Login</NavLink> |{" "}
+      <NavLink to="/college">College</NavLink> |{" "}
+      <NavLink to="/users">Users</NavLink>
       <Outlet />
     </div>
   );
