@@ -2,26 +2,32 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [userList, setUserList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getUsers();
+    fetchUsers();
   }, []);
 
-  async function getUsers() {
-    let response = await fetch("https://dummyjson.com/users");
+  async function fetchUsers() {
+    const url = "http://localhost:3000/users";
+    setLoading(true);
+    let response = await fetch(url);
     response = await response.json();
-    setUserList(response.users);
+    setUserList(response);
+    setLoading(false);
   }
 
   return (
     <div>
       <h1>App Component</h1>
-      {userList.length && (
+      {loading ? (
+        <h2>loading...</h2>
+      ) : (
         <table border={1}>
           <thead>
             <tr>
-              <th>FirstName</th>
-              <th>LastName</th>
+              <th>Id</th>
+              <th>Name</th>
               <th>Age</th>
             </tr>
           </thead>
@@ -29,9 +35,9 @@ function App() {
             {userList.map((user, index) => {
               return (
                 <tr key={index}>
-                  <td>{user.firstName}</td>
-                  <td>{user.lastName}</td>
-                  <td>{user.age}</td>
+                  <td> {user.id} </td>
+                  <td> {user.name} </td>
+                  <td> {user.age} </td>
                 </tr>
               );
             })}
