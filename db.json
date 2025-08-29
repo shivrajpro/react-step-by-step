@@ -1,14 +1,14 @@
 {
   "posts": [
     {
-      "id": 1,
+      "id": "1",
       "title": "json-server",
       "author": "typicode"
     }
   ],
   "comments": [
     {
-      "id": 1,
+      "id": "1",
       "body": "some comment",
       "postId": 1
     }
@@ -33,9 +33,9 @@
       "age": 30
     },
     {
-      "id": "726d",
-      "name": "tony",
-      "age": "33"
+      "id": "f08b",
+      "name": "Bruce",
+      "age": "44"
     }
   ]
 }

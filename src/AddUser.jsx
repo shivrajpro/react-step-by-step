@@ -13,7 +13,7 @@ const AddUser = () => {
       body: JSON.stringify({ name: username, age }),
     });
 
-    console.log(">> response", response);
+    alert("New User Added");
     navigate("/");
   };
 
