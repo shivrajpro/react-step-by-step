@@ -1,61 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [todoItem, setTodoItem] = useState("");
-  const [todoList, setTodoList] = useState([]);
+  const [userList, setUserList] = useState([]);
 
-  const addTodo = () => {
-    setTodoList([...todoList, { text: todoItem, completed: false }]);
-    setTodoItem("");
-  };
+  useEffect(() => {
+    getUsers();
+  }, []);
 
-  const deleteTodo = (index) => {
-    const newTodoList = todoList.filter((item, i) => i !== index);
-    setTodoList(newTodoList);
-  };
-
-  const completeTodo = (index) => {
-    const newTodoList = [...todoList];
-    newTodoList[index].completed = !newTodoList[index].completed;
-    setTodoList(newTodoList);
-  };
+  async function getUsers() {
+    let response = await fetch("https://dummyjson.com/users");
+    response = await response.json();
+    setUserList(response.users);
+  }
 
   return (
     <div>
       <h1>App Component</h1>
-      <input
-        type="text"
-        value={todoItem}
-        onChange={(e) => setTodoItem(e.target.value)}
-        placeholder="Enter Todo Item"
-      />
-      <button onClick={() => addTodo()}>Add</button>
-      <ul style={{ listStyleType: "none" }}>
-        {todoList.map((item, index) => {
-          return (
-            <li key={index}>
-              <h3>
-                <input
-                  type="checkbox"
-                  id={"item" + index}
-                  checked={item?.completed}
-                  onChange={() => completeTodo(index)}
-                />
-                <label
-                  htmlFor={"item" + index}
-                  style={{
-                    textDecoration: item?.completed ? "line-through" : "none",
-                  }}
-                >
-                  {item?.text}
-                </label>{" "}
-                &nbsp;
-                <button onClick={() => deleteTodo(index)}>Delete</button>
-              </h3>
-            </li>
-          );
-        })}
-      </ul>
+      {userList.length && (
+        <table border={1}>
+          <thead>
+            <tr>
+              <th>FirstName</th>
+              <th>LastName</th>
+              <th>Age</th>
+            </tr>
+          </thead>
+          <tbody>
+            {userList.map((user, index) => {
+              return (
+                <tr key={index}>
+                  <td>{user.firstName}</td>
+                  <td>{user.lastName}</td>
+                  <td>{user.age}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }
