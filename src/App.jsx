@@ -14,31 +14,7 @@ import Users from "./Users";
 function App() {
   return (
     <div>
-      {/* <Navbar /> */}
-      <Routes>
-        <Route element={<Navbar />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/users/list?" element={<Users />} />{" "}
-          {/* ? means optional segment */}
-          <Route path="/users/:id/:name?" element={<UserDetails />} />
-          {/* Dynamic optional segment */}
-          <Route>
-            <Route path="/user">
-              <Route path="/user/about" element={<About />} />
-              <Route path="/user/login" element={<Login />} />
-            </Route>
-          </Route>
-        </Route>
-
-        <Route path="/college" element={<College />}>
-          {/* Nested Routes */}
-          <Route index element={<Student />} />
-          <Route path="department" element={<Department />} />
-          <Route path="details" element={<Details />} />
-        </Route>
-        <Route path="*" element={<PageNotFound />} />
-        {/* <Route path="*" element={<Navigate to="/login" />} /> */}
-      </Routes>
+      <h1>App Component</h1>
     </div>
   );
 }
