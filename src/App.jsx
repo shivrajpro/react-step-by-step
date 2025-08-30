@@ -1,53 +1,58 @@
-import { useActionState } from "react";
-import "./styles.css";
+import { useReducer } from "react";
+
+const emptyForm = {
+  username: "",
+  password: "",
+  email: "",
+  city: "",
+  pincode: "",
+};
+
+const reducer = (data, action) => {
+  return { ...data, [action.type]: action.val };
+};
 
 function App() {
-  const handleLogin = (prevData, form) => {
-    const username = form.get("username");
-    const password = form.get("password");
-    const regex = /^[a-zA-Z0-9]+$/i;
-
-    if (username.length && username.length > 5) {
-      return {
-        error: "Username cannot contain more than 5 characters",
-        username,
-        password,
-      };
-    } else if (password.length && !regex.test(password)) {
-      return {
-        error: "Special characters are not allowed in password",
-        username,
-        password,
-      };
-    } else {
-      return { message: "Login done" };
-    }
-  };
-  const [data, action, pending] = useActionState(handleLogin);
-
-  console.log("data", data);
+  const [state, dispatch] = useReducer(reducer, emptyForm);
+  console.log(state);
 
   return (
     <div>
       <h1>App Component</h1>
-      <span style={{ color: "green" }}> {data?.message} </span>
-      <span style={{ color: "red" }}> {data?.error} </span>
-      <form action={action}>
-        <input
-          defaultValue={data?.username}
-          type="text"
-          placeholder="enter username"
-          name="username"
-        />
-
-        <input
-          defaultValue={data?.password}
-          type="text"
-          placeholder="enter password"
-          name="password"
-        />
-        <button disabled={pending}>Login</button>
-      </form>
+      <input
+        type="text"
+        placeholder="enter username"
+        onChange={(e) => dispatch({ val: e.target.value, type: "username" })}
+      />
+      <br />
+      <input
+        type="text"
+        placeholder="enter password"
+        onChange={(e) => dispatch({ val: e.target.value, type: "password" })}
+      />
+      <br />
+      <input
+        type="text"
+        placeholder="enter email"
+        onChange={(e) => dispatch({ val: e.target.value, type: "email" })}
+      />
+      <br />
+      <input
+        type="text"
+        placeholder="enter city"
+        onChange={(e) => dispatch({ val: e.target.value, type: "city" })}
+      />
+      <br />
+      <input
+        type="text"
+        placeholder="enter pincode"
+        onChange={(e) => dispatch({ val: e.target.value, type: "pincode" })}
+      />
+      <hr />
+      <h2> Username:{state.username} </h2>
+      <h2> Email:{state.email} </h2>
+      <h2> City:{state.city} </h2>
+      <h2> Pincode:{state.pincode} </h2>
     </div>
   );
 }
