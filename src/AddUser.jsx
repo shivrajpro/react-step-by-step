@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { baseApiUrl } from "./UserList";
 
 const AddUser = () => {
   const [username, setUsername] = useState("");
@@ -7,8 +8,7 @@ const AddUser = () => {
   const navigate = useNavigate();
 
   const onAddUser = async () => {
-    const url = "http://localhost:3000/users";
-    let response = await fetch(url, {
+    await fetch(baseApiUrl, {
       method: "POST",
       body: JSON.stringify({ name: username, age }),
     });

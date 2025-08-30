@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
+export const baseApiUrl = "http://localhost:3000/users";
 const UserList = () => {
   const [userList, setUserList] = useState([]);
-  const url = "http://localhost:3000/users";
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
   async function fetchUsers() {
-    let response = await fetch(url);
+    let response = await fetch(baseApiUrl);
     response = await response.json();
 
     setUserList(response);
@@ -17,7 +19,9 @@ const UserList = () => {
 
   async function deleteUser(userId) {
     if (confirm("Are you sure to delete the user with Id: " + userId)) {
-      let response = await fetch(`${url}/${userId}`, { method: "delete" });
+      let response = await fetch(`${baseApiUrl}/${userId}`, {
+        method: "delete",
+      });
       response = await response.json();
 
       if (response) {
@@ -26,6 +30,10 @@ const UserList = () => {
       }
     }
   }
+
+  const editUser = (userId) => {
+    navigate("edit-user/" + userId);
+  };
 
   return (
     <div>
@@ -48,7 +56,9 @@ const UserList = () => {
                   <td> {user.age} </td>
                   <td>
                     {" "}
-                    <button>Edit</button> |{" "}
+                    <button onClick={() => editUser(user.id)}>
+                      Edit
+                    </button> |{" "}
                     <button onClick={() => deleteUser(user.id)}>Delete</button>
                   </td>
                 </tr>
