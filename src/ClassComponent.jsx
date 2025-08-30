@@ -1,5 +1,4 @@
 import Student from "./Student";
-import Subject from "./Subject";
 
 const ClassComponent = () => {
   return (
