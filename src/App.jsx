@@ -1,50 +1,52 @@
-import { useState } from "react";
+import { useActionState } from "react";
 import "./styles.css";
 
 function App() {
-  const [name, setName] = useState();
-  const [nameErr, setNameErr] = useState();
-  const [password, setPassword] = useState();
-  const [passwordErr, setPasswordErr] = useState();
-
-  const handleName = (evt) => {
-    const enteredName = evt.target.value;
-    if (enteredName.length > 5) {
-      setNameErr("Only 5 characters are allowed in name");
-    } else {
-      setNameErr("");
-    }
-  };
-
-  const handlePassword = (evt) => {
-    const enteredPassword = evt.target.value;
+  const handleLogin = (prevData, form) => {
+    const username = form.get("username");
+    const password = form.get("password");
     const regex = /^[a-zA-Z0-9]+$/i;
-    if (regex.test(enteredPassword) || enteredPassword.length === 0) {
-      setPasswordErr("");
+
+    if (username.length && username.length > 5) {
+      return {
+        error: "Username cannot contain more than 5 characters",
+        username,
+        password,
+      };
+    } else if (password.length && !regex.test(password)) {
+      return {
+        error: "Special characters are not allowed in password",
+        username,
+        password,
+      };
     } else {
-      setPasswordErr("Special characters are not allowed in password");
+      return { message: "Login done" };
     }
   };
+  const [data, action, pending] = useActionState(handleLogin);
+
+  console.log("data", data);
 
   return (
     <div>
       <h1>App Component</h1>
-      <form>
+      <span style={{ color: "green" }}> {data?.message} </span>
+      <span style={{ color: "red" }}> {data?.error} </span>
+      <form action={action}>
         <input
+          defaultValue={data?.username}
           type="text"
           placeholder="enter username"
-          onChange={handleName}
-          className={nameErr ? "input-error" : ""}
+          name="username"
         />
-        <span style={{ color: "red" }}> {nameErr} </span> <br /> <br />
+
         <input
+          defaultValue={data?.password}
           type="text"
           placeholder="enter password"
-          onChange={handlePassword}
-          className={passwordErr ? "input-error" : ""}
+          name="password"
         />
-        <span style={{ color: "red" }}> {passwordErr} </span> <br /> <br />
-        <button disabled={nameErr || passwordErr}>Login</button>
+        <button disabled={pending}>Login</button>
       </form>
     </div>
   );
