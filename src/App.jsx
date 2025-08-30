@@ -1,19 +1,51 @@
-import { Route, Routes } from "react-router";
-import AddUser from "./AddUser";
-import Navbar from "./Navbar";
-import UserList from "./UserList";
-import EditUser from "./EditUser";
+import { useState } from "react";
+import "./styles.css";
 
 function App() {
+  const [name, setName] = useState();
+  const [nameErr, setNameErr] = useState();
+  const [password, setPassword] = useState();
+  const [passwordErr, setPasswordErr] = useState();
+
+  const handleName = (evt) => {
+    const enteredName = evt.target.value;
+    if (enteredName.length > 5) {
+      setNameErr("Only 5 characters are allowed in name");
+    } else {
+      setNameErr("");
+    }
+  };
+
+  const handlePassword = (evt) => {
+    const enteredPassword = evt.target.value;
+    const regex = /^[a-zA-Z0-9]+$/i;
+    if (regex.test(enteredPassword) || enteredPassword.length === 0) {
+      setPasswordErr("");
+    } else {
+      setPasswordErr("Special characters are not allowed in password");
+    }
+  };
+
   return (
     <div>
       <h1>App Component</h1>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<UserList />}></Route>
-        <Route path="/add-user" element={<AddUser />}></Route>
-        <Route path="/edit-user/:id" element={<EditUser />}></Route>
-      </Routes>
+      <form>
+        <input
+          type="text"
+          placeholder="enter username"
+          onChange={handleName}
+          className={nameErr ? "input-error" : ""}
+        />
+        <span style={{ color: "red" }}> {nameErr} </span> <br /> <br />
+        <input
+          type="text"
+          placeholder="enter password"
+          onChange={handlePassword}
+          className={passwordErr ? "input-error" : ""}
+        />
+        <span style={{ color: "red" }}> {passwordErr} </span> <br /> <br />
+        <button disabled={nameErr || passwordErr}>Login</button>
+      </form>
     </div>
   );
 }
